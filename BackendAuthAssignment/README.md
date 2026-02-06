@@ -127,12 +127,19 @@ appsettings.json
     "DefaultConnection": "Host=localhost;Port=5432;Database=backend_auth;Username=postgres;Password=postgres"
   },
   "Jwt": {
-    "Key": "THIS_IS_A_SUPER_SECRET_KEY",
     "Issuer": "backend-auth",
     "Audience": "backend-auth",
-    "ExpiryMinutes": 60
+    "Key": "REPLACE_WITH_32PLUS_CHAR_SECRET",
+    "AccessTokenMinutes": 15
+  },
+  "Auth": {
+    "OtpValidityMinutes": 5,
+    "OtpLength": 6,
+    "OtpMaxAttempts": 3,
+    "RefreshTokenDays": 7
   }
 }
+
 
 🧪 Run Project
 dotnet restore
@@ -143,84 +150,4 @@ dotnet run
 Swagger will be available at:
 
 http://localhost:5176/swagger
-
-✅ Features Covered
-
-OTP-based authentication
-
-JWT Access & Refresh tokens
-
-Swagger Authorization button
-
-Protected APIs with [Authorize]
-
-Custom Authorization Policy
-
-PostgreSQL with EF Core
-
-Clean project structure
-
-👨‍💻 Author
-
-Rohith Marupaka
-Backend Auth Assignment
-.NET 8 | JWT | PostgreSQL
-
-
----
-
-## ✅ Final steps (simple)
-
-1️⃣ `README.md` open chey  
-2️⃣ **Motham delete chey**  
-3️⃣ **Above content paste chey**  
-4️⃣ **Save (CTRL + S)**  
-
-Tarvata:
-```bash
-git add README.md
-git commit -m "Add README documentation"
-git push
-
-
-Annaya ❤️
-Idhi professional-level README
-Assignment submit chesina vaadu chusthe clear ga ardam avuthundi.
-
-Inka kavali ante:
-
-Interview explanation
-
-Flow diagram explanation
-
-Submission message
-
-Cheppu 🔥
-
-till this i should copy haaaa?/
-
-😂 YES annaya — correct ga ardam cheskunnav ✅
-Run Project section varaku copy cheyyali 👍
-
-Let me be 100% clear, step-by-step 👇
-
-✅ WHAT TO COPY
-
-👉 README.md lo
-👉 Start nundi
-👉 Run Project section + Swagger URL varaku
-
-This part 👇 FULL ga undali:
-
-# Backend Auth Assignment 🚀
-...
-## 🧪 Run Project
-
-dotnet restore
-dotnet ef database update
-dotnet run
-
-Swagger will be available at:
-http://localhost:5176/swagger
-
 
