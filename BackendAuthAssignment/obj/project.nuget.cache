@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8+GI5b1DigY=",
+  "dgSpecHash": "fq0BMXSmZsQ=",
   "success": true,
   "projectFilePath": "C:\\Users\\rmarupak\\source\\repos\\backend-auth-assignment\\BackendAuthAssignment\\BackendAuthAssignment.csproj",
   "expectedPackageFiles": [
@@ -15,7 +15,7 @@
     "C:\\Users\\rmarupak\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.4\\microsoft.entityframeworkcore.8.0.4.nupkg.sha512",
     "C:\\Users\\rmarupak\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.4\\microsoft.entityframeworkcore.abstractions.8.0.4.nupkg.sha512",
     "C:\\Users\\rmarupak\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.4\\microsoft.entityframeworkcore.analyzers.8.0.4.nupkg.sha512",
-    "C:\\Users\\rmarupak\\.nuget\\packages\\microsoft.entityframeworkcore.design\\8.0.2\\microsoft.entityframeworkcore.design.8.0.2.nupkg.sha512",
+    "C:\\Users\\rmarupak\\.nuget\\packages\\microsoft.entityframeworkcore.design\\8.0.4\\microsoft.entityframeworkcore.design.8.0.4.nupkg.sha512",
     "C:\\Users\\rmarupak\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\8.0.4\\microsoft.entityframeworkcore.relational.8.0.4.nupkg.sha512",
     "C:\\Users\\rmarupak\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\rmarupak\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
@@ -59,18 +59,5 @@
     "C:\\Users\\rmarupak\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
     "C:\\Users\\rmarupak\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "message": "BackendAuthAssignment depends on Npgsql.EntityFrameworkCore.PostgreSQL (>= 8.0.3) but Npgsql.EntityFrameworkCore.PostgreSQL 8.0.3 was not found. Npgsql.EntityFrameworkCore.PostgreSQL 8.0.4 was resolved instead.",
-      "projectPath": "C:\\Users\\rmarupak\\source\\repos\\backend-auth-assignment\\BackendAuthAssignment\\BackendAuthAssignment.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\rmarupak\\source\\repos\\backend-auth-assignment\\BackendAuthAssignment\\BackendAuthAssignment.csproj",
-      "libraryId": "Npgsql.EntityFrameworkCore.PostgreSQL",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }

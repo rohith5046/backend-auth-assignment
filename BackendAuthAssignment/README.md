@@ -1,13 +1,8 @@
 # Backend Auth Assignment 🚀
 
-This project is a **Backend Authentication System** built using **ASP.NET Core (.NET 8)** with **JWT-based authentication**, **OTP login**, **PostgreSQL**, and **Swagger UI**.
+This project is a **Backend Authentication System** built using **ASP.NET Core (.NET 8)** with **OTP-based login**, **JWT authentication**, **PostgreSQL**, and **Swagger UI**.
 
-The application supports:
-- OTP-based login
-- JWT Access & Refresh tokens
-- User basic registration
-- Protected APIs using Authorization
-- Swagger Authorization (Authorize button)
+The implementation follows the trial assignment specifications and focuses on clean backend design, authentication flow, security basics, and documentation.
 
 ---
 
@@ -16,85 +11,107 @@ The application supports:
 - ASP.NET Core Web API (.NET 8)
 - Entity Framework Core
 - PostgreSQL
-- JWT Authentication
+- JWT (Access & Refresh Tokens)
 - Swagger / OpenAPI
-- Swashbuckle
 
 ---
 
 ## 📁 Project Structure
+
+
 
 BackendAuthAssignment/
 │
 ├── Authorization/ # Custom authorization handlers & policies
 ├── Controllers/ # AuthController, UserController
 ├── Data/ # AppDbContext
-├── Dtos/ # Request/Response DTOs
+├── Dtos/ # Request & Response DTOs
 ├── Models/ # User, UserProfile, Session, OtpRequest
 ├── Services/ # AuthService, OtpService, JwtTokenService
 ├── Migrations/ # EF Core migrations
-├── Program.cs # App startup & configuration
+├── Program.cs # Application startup & configuration
 ├── appsettings.json # Configuration
-└── README.md # Project documentation
+└── README.md # Documentation
+
 
 ---
 
 ## 🔐 Authentication Flow
 
 ### 1️⃣ Request OTP
-POST /auth/request-otp
+**POST** `/auth/request-otp`
+
+```json
+{
+  "phoneNumber": "9999999999"
+}
 
 
-### 2️⃣ Verify OTP (Login)
+✔️ OTP is generated and stored securely (hashed).
+
+2️⃣ Verify OTP
+
 POST /auth/verify-otp
 
-POST /auth/verify-otp
+{
+  "phoneNumber": "9999999999",
+  "otp": "123456"
+}
 
 
-✔️ Returns:
-- `accessToken`
-- `refreshToken`
-- `isBasicRegistrationComplete`
+✔️ On success, returns:
 
----
+accessToken
 
-### 3️⃣ Refresh Token
+refreshToken
+
+isBasicRegistrationComplete
+
+3️⃣ Refresh Access Token
+
 POST /auth/refresh
 
+{
+  "refreshToken": "<refresh_token>"
+}
 
----
-
-### 4️⃣ Logout
-
+4️⃣ Logout
 
 POST /auth/logout
 
+{
+  "refreshToken": "<refresh_token>"
+}
 
----
+👤 User APIs
+🔹 Basic Registration (Protected)
 
-## 👤 User APIs
-### 🔹 Basic Registration (Protected)
 POST /user/register/basic
 
+Authorization Header
 
-**Authorization:**  
 Bearer <access_token>
 
 
-**Request Body Example**
-```json
+Request Body
+
 {
-"fullName": "Rohith Marupaka",
-  "dateOfBirth": "1999-06-15",
-  "email": "rohith.net01@gmail.com",
+  "fullName": "Rohith Marupaka",
+  "dateOfBirth": "2004-09-11",
+  "email": "de@gmail.com",
   "location": {
     "city": "Hyderabad",
+    "state": "Telangana",
     "country": "India"
   }
 }
-Get Current User (Protected + Policy)
-GET /user/me
 
+
+✔️ Marks basic registration as complete.
+
+🔹 Get Current User (Protected + Policy)
+
+GET /user/me
 
 ✔️ Requires:
 
@@ -102,26 +119,77 @@ Valid JWT token
 
 Basic registration completed
 
-🔑 Swagger Authorization (Important)
+🔒 Authorization & Policy
+
+JWT authentication using Bearer tokens
+
+Custom authorization policy: RegistrationComplete
+
+/user/me endpoint is accessible only after basic registration is completed
+
+⏱ OTP Rate Limiting
+
+To prevent OTP abuse, rate limiting is implemented at the database level.
+
+Limits
+
+Hourly Limit: Max 3 OTP requests per phone number per hour
+
+Daily Limit: Max 10 OTP requests per phone number in a rolling 24-hour window
+
+Behavior
+
+OTP requests beyond limits are blocked
+
+Clear error messages are returned
+
+Rate limit counters reset automatically based on time window
+
+Each OTP request stores:
+
+Phone number
+
+Timestamp
+
+Status (OK, BLOCKED_HOURLY, BLOCKED_DAILY)
+
+📌 OTP Delivery (Mocked)
+
+For this assignment, OTP delivery is mocked.
+
+OTPs are not sent via SMS
+
+Generated OTPs are logged to the application console/terminal
+
+This avoids external SMS integrations while preserving OTP flow logic
+
+➡️ During testing, check the server console output to retrieve the OTP.
+
+🔑 Swagger Usage
 
 Open Swagger UI
 
 http://localhost:5176/swagger
 
 
-Click Authorize (🔒 top-right)
+Call /auth/verify-otp to get accessToken
 
-Paste token like below:
+Click Authorize (🔒)
 
-Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Enter:
+
+Bearer <access_token>
 
 
-Click Authorize
+Test protected APIs
 
-Now protected APIs will work ✅
+Note: Swagger auto-generates request templates.
+For fields like location, the request body must be manually edited to provide a valid JSON object.
 
 ⚙️ Configuration
+
 appsettings.json
+
 {
   "ConnectionStrings": {
     "DefaultConnection": "Host=localhost;Port=5432;Database=backend_auth;Username=postgres;Password=postgres"
@@ -129,17 +197,18 @@ appsettings.json
   "Jwt": {
     "Issuer": "backend-auth",
     "Audience": "backend-auth",
-    "Key": "REPLACE_WITH_32PLUS_CHAR_SECRET",
+    "Key": "CHANGE_THIS_TO_A_LONG_RANDOM_SECRET_KEY_32PLUS_CHARS",
     "AccessTokenMinutes": 15
   },
   "Auth": {
     "OtpValidityMinutes": 5,
     "OtpLength": 6,
     "OtpMaxAttempts": 3,
-    "RefreshTokenDays": 7
+    "RefreshTokenDays": 7,
+    "OtpHourlyLimit": 3,
+    "OtpDailyLimit": 10
   }
 }
-
 
 🧪 Run Project
 dotnet restore
@@ -151,3 +220,28 @@ Swagger will be available at:
 
 http://localhost:5176/swagger
 
+✅ Features Covered
+
+OTP-based authentication
+
+JWT access & refresh tokens
+
+OTP rate limiting (hourly & daily)
+
+Secure token storage (hashed refresh tokens)
+
+Custom authorization policy
+
+Protected APIs
+
+Swagger integration
+
+PostgreSQL with EF Core
+
+Clean & normalized database design
+
+👨‍💻 Author
+
+Rohith Marupaka
+Backend Auth Assignment
+ASP.NET Core | JWT | PostgreSQL

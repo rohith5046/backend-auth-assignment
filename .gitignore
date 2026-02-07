@@ -416,3 +416,14 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+# .NET build folders
+bin/
+obj/
+
+# VS / Rider
+.vs/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
