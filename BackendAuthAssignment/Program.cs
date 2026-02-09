@@ -42,7 +42,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// ✅ AUTHORIZATION POLICY (IMPORTANT)
+// AUTHORIZATION POLICY (IMPORTANT)
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(
