@@ -1,4 +1,4 @@
-# Backend Auth Assignment 🚀
+# Backend Auth Assignment 
 
 This project is a **Backend Authentication System** built using **ASP.NET Core (.NET 8)** with **OTP-based login**, **JWT authentication**, **PostgreSQL**, and **Swagger UI**.
 
@@ -6,7 +6,7 @@ The implementation follows the trial assignment specifications and focuses on cl
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 - ASP.NET Core Web API (.NET 8)
 - Entity Framework Core
@@ -16,7 +16,7 @@ The implementation follows the trial assignment specifications and focuses on cl
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 
 
@@ -36,9 +36,9 @@ BackendAuthAssignment/
 
 ---
 
-## 🔐 Authentication Flow
+##  Authentication Flow
 
-### 1️⃣ Request OTP
+### 1 Request OTP
 **POST** `/auth/request-otp`
 
 ```json
@@ -47,7 +47,7 @@ BackendAuthAssignment/
 }
 
 
-✔️ OTP is generated and stored securely (hashed).
+ OTP is generated and stored securely (hashed).
 
 2️⃣ Verify OTP
 
@@ -59,7 +59,7 @@ POST /auth/verify-otp
 }
 
 
-✔️ On success, returns:
+ On success, returns:
 
 accessToken
 
@@ -83,8 +83,8 @@ POST /auth/logout
   "refreshToken": "<refresh_token>"
 }
 
-👤 User APIs
-🔹 Basic Registration (Protected)
+ User APIs
+ Basic Registration (Protected)
 
 POST /user/register/basic
 
@@ -107,19 +107,19 @@ Request Body
 }
 
 
-✔️ Marks basic registration as complete.
+ Marks basic registration as complete.
 
-🔹 Get Current User (Protected + Policy)
+ Get Current User (Protected + Policy)
 
 GET /user/me
 
-✔️ Requires:
+ Requires:
 
 Valid JWT token
 
 Basic registration completed
 
-🔒 Authorization & Policy
+ Authorization & Policy
 
 JWT authentication using Bearer tokens
 
@@ -153,7 +153,7 @@ Timestamp
 
 Status (OK, BLOCKED_HOURLY, BLOCKED_DAILY)
 
-📌 OTP Delivery (Mocked)
+ OTP Delivery (Mocked)
 
 For this assignment, OTP delivery is mocked.
 
@@ -163,18 +163,32 @@ Generated OTPs are logged to the application console/terminal
 
 This avoids external SMS integrations while preserving OTP flow logic
 
-➡️ During testing, check the server console output to retrieve the OTP.
+ During testing, check the server console output to retrieve the OTP.
 
-🔑 Swagger Usage
+ ###  OTP Delivery (Mocked)
+
+For this assignment, OTP delivery is mocked.
+
+- OTPs are NOT sent via SMS.
+- Generated OTPs are logged to the application console / terminal.
+- This avoids external SMS integrations while preserving OTP flow logic.
+
+ During testing, retrieve the OTP from the server console output.
+
+#Migrations#
+
+ Database schema is managed using Entity Framework Core migrations.
+
+ Swagger Usage
 
 Open Swagger UI
 
-http://localhost:5176/swagger
-
+Swagger will be available at:
+http://localhost:<port>/swagger
 
 Call /auth/verify-otp to get accessToken
 
-Click Authorize (🔒)
+Click Authorize ()
 
 Enter:
 
@@ -186,7 +200,7 @@ Test protected APIs
 Note: Swagger auto-generates request templates.
 For fields like location, the request body must be manually edited to provide a valid JSON object.
 
-⚙️ Configuration
+ Configuration
 
 appsettings.json
 
@@ -197,7 +211,7 @@ appsettings.json
   "Jwt": {
     "Issuer": "backend-auth",
     "Audience": "backend-auth",
-    "Key": "CHANGE_THIS_TO_A_LONG_RANDOM_SECRET_KEY_32PLUS_CHARS",
+    "Key": "CHANGE_THIS_TO_A_LONG_RANDOM_SECRET_KEY_32PLUS_CHAR",
     "AccessTokenMinutes": 15
   },
   "Auth": {
@@ -210,7 +224,7 @@ appsettings.json
   }
 }
 
-🧪 Run Project
+Run Project
 dotnet restore
 dotnet ef database update
 dotnet run
@@ -218,9 +232,14 @@ dotnet run
 
 Swagger will be available at:
 
-http://localhost:5176/swagger
+http://localhost:<port>/swagger
 
-✅ Features Covered
+NOTE:
+
+Swagger will be available at the URL printed in the terminal
+(e.g. http://localhost:5000/swagger or http://localhost:5176/swagger)
+
+ Features Covered
 
 OTP-based authentication
 
@@ -240,7 +259,7 @@ PostgreSQL with EF Core
 
 Clean & normalized database design
 
-👨‍💻 Author
+ Author
 
 Rohith Marupaka
 Backend Auth Assignment
